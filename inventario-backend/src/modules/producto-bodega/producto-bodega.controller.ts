@@ -27,8 +27,8 @@ export class ProductoBodegaController {
     }
 
     @Post()
-    create(@Body() body: CreateProductoBodegaDto) {
-        const data = this.productoBodegaService.create(body)
+    async create(@Body() body: CreateProductoBodegaDto) {
+        const data = await this.productoBodegaService.create(body);
 
         return {
             ok: true,
@@ -36,6 +36,7 @@ export class ProductoBodegaController {
             data,
         };
     }
+
 
     @Patch(':id')
     update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateProductoBodegaDto) {

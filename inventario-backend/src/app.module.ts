@@ -8,6 +8,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { BodegasModule } from './modules/bodegas/bodegas.module';
 import { ProductoBodegaModule } from './modules/producto-bodega/producto-bodega.module';
 import { MovimientosInventarioModule } from './modules/movimientos-inventario/movimientos-inventario.module';
+import { DevolucionesModule } from './modules/devoluciones/devoluciones.module';
+import { ReportesModule } from './modules/reportes/reportes.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { MovimientosInventarioModule } from './modules/movimientos-inventario/mo
     BodegasModule,
     ProductoBodegaModule,
     MovimientosInventarioModule,
+    DevolucionesModule,
+    ReportesModule,
   ],
 })
 export class AppModule {}

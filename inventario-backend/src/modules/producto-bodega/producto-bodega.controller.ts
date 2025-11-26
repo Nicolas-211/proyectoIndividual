@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
 import { ProductoBodegaService } from './producto-bodega.service';
 import { CreateProductoBodegaDto } from '../dto/create-producto-bodega.dto';
 import { UpdateProductoBodegaDto } from '../dto/update-producto-bodega.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { Roles } from 'src/common/decorators/roles.decorator';
 @Controller('producto-bodega')
 export class ProductoBodegaController {
 
@@ -9,6 +11,7 @@ export class ProductoBodegaController {
         private readonly productoBodegaService: ProductoBodegaService
     ) { }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get()
     async getAll() {
         const data = await this.productoBodegaService.findAll();
@@ -20,12 +23,15 @@ export class ProductoBodegaController {
         };
     }
 
-
+    @UseGuards(AuthGuard('jwt'))
+    @Roles('admin', 'bodeguero')
     @Get(':id')
     getOne(@Param('id', ParseIntPipe) id: number) {
         return this.productoBodegaService.findOne(id);
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @Roles('admin', 'bodeguero')
     @Post()
     async create(@Body() body: CreateProductoBodegaDto) {
         const data = await this.productoBodegaService.create(body);
@@ -37,12 +43,14 @@ export class ProductoBodegaController {
         };
     }
 
-
+    @UseGuards(AuthGuard('jwt'))
+    @Roles('admin', 'bodeguero')
     @Patch(':id')
     update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateProductoBodegaDto) {
         return this.productoBodegaService.update(id, body);
     }
-
+    @UseGuards(AuthGuard('jwt'))
+      @Roles('admin', 'bodeguero')
     @Delete(':id')
     async remove(@Param('id', ParseIntPipe) id: number) {
         await this.productoBodegaService.remove(id);

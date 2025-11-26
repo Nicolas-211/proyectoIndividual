@@ -5,6 +5,8 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module';
 import { JwtStrategy } from './jwt.strategy';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 function resolveExpiresIn(): number | StringValue {
   const raw = process.env.JWT_EXPIRES ?? '1d';  // e.g., "1d", "12h", "3600"
@@ -22,7 +24,11 @@ function resolveExpiresIn(): number | StringValue {
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService,  JwtStrategy,
+  {
+    provide: APP_GUARD,
+    useClass: RolesGuard,
+  },],
   exports: [AuthService],
 })
 export class AuthModule {}

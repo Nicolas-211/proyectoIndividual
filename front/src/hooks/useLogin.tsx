@@ -1,4 +1,3 @@
-// src/hooks/useLogin.ts
 import { useState } from "react";
 import { api } from "../services/api";
 import { useAuth } from "../context/AuthContext";
@@ -21,12 +20,16 @@ export default function useLogin() {
       console.log("Respuesta login:", res.data);
 
       const token = res.data.access_token;
+      const backendRole = res.data.user?.rol as AppRole;
 
-      // Cuando tengas el rol real del backend, lo usas aquí:
-      // const role: AppRole = res.data.role;
-      const role: AppRole = "admin"; // por ahora, para probar
+      // 🚀 ESTO DISPARA setApiToken(token)
+      login({
+        token, role: backendRole || "usuario",
+        id: res.data.user?.id
+      });
 
-      login({ token, role });
+      console.log("Respuesta login:", res.data);
+
     } catch (e: any) {
       console.log("Error en login:", e?.response?.data || e);
       Alert.alert("Error", "Credenciales incorrectas");
@@ -35,5 +38,12 @@ export default function useLogin() {
     }
   };
 
-  return { email, password, setEmail, setPassword, handleLogin, loading };
+  return {
+    email,
+    password,
+    setEmail,
+    setPassword,
+    handleLogin,
+    loading,
+  };
 }

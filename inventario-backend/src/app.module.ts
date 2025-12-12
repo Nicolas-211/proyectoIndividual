@@ -10,6 +10,7 @@ import { ProductoBodegaModule } from './modules/producto-bodega/producto-bodega.
 import { MovimientosInventarioModule } from './modules/movimientos-inventario/movimientos-inventario.module';
 import { DevolucionesModule } from './modules/devoluciones/devoluciones.module';
 import { ReportesModule } from './modules/reportes/reportes.module';
+import { UsuarioBodegaModule } from './modules/usuario-bodega/usuario-bodega.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ReportesModule } from './modules/reportes/reportes.module';
     MovimientosInventarioModule,
     DevolucionesModule,
     ReportesModule,
+    UsuarioBodegaModule
   ],
 })
 export class AppModule {}

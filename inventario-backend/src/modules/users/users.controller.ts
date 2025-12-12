@@ -41,8 +41,6 @@ export class UsersController {
   // ===============================
   // SOLO ADMIN PUEDE CREAR
   // ===============================
-  @UseGuards(AuthGuard('jwt'))
-  @Roles('admin')
   @Post()
   create(@Body() body: CreateUserDto) {
     return this.usersService.create(body);

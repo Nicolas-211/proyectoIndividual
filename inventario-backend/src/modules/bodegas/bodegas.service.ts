@@ -7,6 +7,9 @@ import { UpdateBodegaDto } from '../dto/update-bodega.dto';
 
 @Injectable()
 export class BodegasService {
+  assignUser(id: number, usuario_id: any, rolEnBodega: any) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(Bodega)
     private readonly bodegaRepo: Repository<Bodega>,

@@ -1,21 +1,13 @@
-import { AuthProvider, useAuth } from "./src/context/AuthContext";
-import LoginScreen from "./src/screens/LoginScreen";
-import HomeScreen from "./src/screens/HomeScreen";
-
-function Main() {
-  const { token } = useAuth();
-
-  if (!token) {
-    return <LoginScreen />;
-  }
-
-  return <HomeScreen />;
-}
+import { NavigationContainer } from "@react-navigation/native";
+import { AuthProvider } from "./src/context/AuthContext";
+import RootNavigator from "./src/components/navigation/RootNavigator";
 
 export default function App() {
   return (
     <AuthProvider>
-      <Main />
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
     </AuthProvider>
   );
 }

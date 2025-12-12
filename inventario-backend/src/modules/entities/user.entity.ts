@@ -6,6 +6,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Role } from './role.entity';
+import { OneToMany } from 'typeorm';
+import { UsuarioBodega } from './usuario-bodega.entity';
 
 @Entity({ name: 'usuario' })
 export class User {
@@ -34,4 +36,6 @@ export class User {
   @JoinColumn({ name: 'rol_id' })
   rol: Role | null;
 
+  @OneToMany(() => UsuarioBodega, (ub) => ub.usuario)
+usuarioBodegas: UsuarioBodega[];
 }

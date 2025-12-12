@@ -17,13 +17,12 @@ import { Roles } from 'src/common/decorators/roles.decorator';
 
 @Controller('bodegas')
 export class BodegasController {
-  constructor(private readonly bodegaService: BodegasService) {}
+  constructor(private readonly bodegaService: BodegasService) { }
 
   // ======================
   // VER TODAS LAS BODEGAS
   // ======================
   @UseGuards(AuthGuard('jwt'))
-  @Roles('admin', 'bodeguero')
   @Get()
   getAll() {
     return this.bodegaService.findAll();
@@ -33,7 +32,6 @@ export class BodegasController {
   // VER UNA BODEGA
   // ======================
   @UseGuards(AuthGuard('jwt'))
-  @Roles('admin', 'bodeguero')
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number) {
     return this.bodegaService.findOne(id);
@@ -70,5 +68,11 @@ export class BodegasController {
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.bodegaService.remove(id);
+  }
+
+  @Post(':id/usuarios')
+  @UseGuards(AuthGuard('jwt'))
+  async assignUserToBodega(@Param('id') id: number, @Body() body) {
+    return this.bodegaService.assignUser(id, body.usuario_id, body.rolEnBodega);
   }
 }

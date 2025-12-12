@@ -24,7 +24,6 @@ export class ProductoBodegaController {
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Roles('admin', 'bodeguero')
     @Get(':id')
     getOne(@Param('id', ParseIntPipe) id: number) {
         return this.productoBodegaService.findOne(id);
@@ -50,7 +49,7 @@ export class ProductoBodegaController {
         return this.productoBodegaService.update(id, body);
     }
     @UseGuards(AuthGuard('jwt'))
-      @Roles('admin', 'bodeguero')
+    @Roles('admin', 'bodeguero')
     @Delete(':id')
     async remove(@Param('id', ParseIntPipe) id: number) {
         await this.productoBodegaService.remove(id);
@@ -60,5 +59,20 @@ export class ProductoBodegaController {
             message: 'Relación eliminada exitosamente',
         };
     }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Get('bodega/:bodegaId')
+    async getByBodega(
+        @Param('bodegaId', ParseIntPipe) bodegaId: number
+    ) {
+        const data = await this.productoBodegaService.findByBodega(bodegaId);
+
+        return {
+            ok: true,
+            total: data.length,
+            data,
+        };
+    }
+
 
 }

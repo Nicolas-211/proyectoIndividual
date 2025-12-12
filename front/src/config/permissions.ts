@@ -1,17 +1,14 @@
 // src/config/permissions.ts
+
 export type AppRole = "admin" | "bodeguero" | "usuario" | null;
 
-export type SectionId =
-  | "dashboard"
-  | "productos"
-  | "bodegas"
-  | "reportes"
-  | "devoluciones";
+// 🔥 AHORA SectionId ES UN STRING PARA USAR NAVIGATOR CORRECTAMENTE
+export type SectionId = string;
 
 export interface SideMenuItem {
   id: SectionId;
   label: string;
-  allow: AppRole[]; // qué roles pueden verlo
+  allow: AppRole[]; // roles permitidos
 }
 
 export const SIDE_MENU_ITEMS: SideMenuItem[] = [

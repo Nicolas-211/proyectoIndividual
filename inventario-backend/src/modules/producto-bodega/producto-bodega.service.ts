@@ -140,4 +140,12 @@ export class ProductoBodegaService {
 
     return { deleted: true };
   }
+
+  async findByBodega(bodegaId: number) {
+  return this.productoBodegaRepo.find({
+    where: { bodega: { id: bodegaId } },
+    relations: ['producto', 'bodega'],
+  });
+}
+
 }

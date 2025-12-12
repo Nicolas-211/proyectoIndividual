@@ -1,14 +1,16 @@
-// src/context/AuthContext.tsx
 import { createContext, useContext, useState, ReactNode } from "react";
 import type { AppRole } from "../config/permissions";
+import { setApiToken } from "../services/api";
 
 interface AuthState {
   token: string | null;
-  role: AppRole;
+  role: AppRole | null;
+  id: number | null; // <-- SE AGREGA
 }
 
 interface AuthContextType extends AuthState {
-  login: (data: { token: string; role: AppRole }) => void;
+  user: { token: string; role: AppRole; id: number } | null;
+  login: (data: { token: string; role: AppRole; id: number }) => void;
   logout: () => void;
 }
 
@@ -18,18 +20,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AuthState>({
     token: null,
     role: null,
+    id: null,
   });
 
-  const login = ({ token, role }: { token: string; role: AppRole }) => {
-    setState({ token, role });
+  const login = ({ token, role, id }: { token: string; role: AppRole; id: number }) => {
+    setState({ token, role, id });
+    setApiToken(token);
   };
 
   const logout = () => {
-    setState({ token: null, role: null });
+    setState({ token: null, role: null, id: null });
+    setApiToken(null);
   };
 
+  // user derivado
+  const user = state.token
+    ? { token: state.token, role: state.role as AppRole, id: state.id as number }
+    : null;
+
   return (
-    <AuthContext.Provider value={{ ...state, login, logout }}>
+    <AuthContext.Provider value={{ ...state, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

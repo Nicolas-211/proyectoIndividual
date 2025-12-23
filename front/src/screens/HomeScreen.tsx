@@ -27,7 +27,7 @@ export default function HomeScreen() {
   const SCREEN_MAP: Record<string, string> = {
     dashboard: "HomeScreen",
     productos: "ProductosSection",
-    bodegas: "BodegasScreen",
+    bodegas: "BodegaSection",
     reportes: "ReportesScreen",
     devoluciones: "DevolucionesScreen",
   };

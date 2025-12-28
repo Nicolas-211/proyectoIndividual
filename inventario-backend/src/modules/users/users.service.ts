@@ -22,6 +22,28 @@ export class UsersService {
   findAll() {
     return this.userRepo.find();
   }
+  
+  async findBodegueros() {
+  return this.userRepo.find({
+    relations: ['rol'],
+    where: {
+      rol: {
+        nombre: 'bodeguero',
+      },
+    },
+    select: {
+      id: true,
+      nombre: true,
+      apPaterno: true,
+      apMaterno: true,
+      email: true,
+      rol: {
+        id: true,
+        nombre: true,
+      },
+    },
+  });
+}
 
   async findOne(id: string) {
     const user = await this.userRepo.findOne({ where: { id } });

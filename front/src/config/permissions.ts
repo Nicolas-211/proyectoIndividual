@@ -17,6 +17,12 @@ export const SIDE_MENU_ITEMS: SideMenuItem[] = [
   { id: "bodegas", label: "Bodegas", allow: ["admin", "bodeguero"] },
   { id: "reportes", label: "Reportes", allow: ["admin"] },
   { id: "devoluciones", label: "Devoluciones", allow: ["admin", "bodeguero"] },
+  {
+  id: "AdminBodegasSection",
+  label: "Administrar bodegas",
+  allow: ["admin"],
+}
+
 ];
 
 export function getRoleFlags(role: AppRole) {

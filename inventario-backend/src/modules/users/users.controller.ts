@@ -16,7 +16,7 @@ import { Roles } from 'src/common/decorators/roles.decorator';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   // ===============================
   // SOLO ADMIN PUEDE VER TODOS
@@ -27,6 +27,13 @@ export class UsersController {
   getAll() {
     return this.usersService.findAll();
   }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('bodegueros')
+  getBodegueros() {
+    return this.usersService.findBodegueros();
+  }
+
 
   // ===============================
   // SOLO ADMIN PUEDE VER UNO

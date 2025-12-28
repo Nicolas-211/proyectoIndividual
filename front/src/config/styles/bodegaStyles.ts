@@ -76,4 +76,21 @@ export const styles = StyleSheet.create({
     color: "#dc2626",
     textAlign: "center",
   },
+
+  assignButton: {
+  marginLeft: 12,
+  backgroundColor: "#10b981", // verde
+  paddingHorizontal: 12,
+  paddingVertical: 6,
+  borderRadius: 6,
+  justifyContent: "center",
+  alignItems: "center",
+},
+
+assignButtonText: {
+  color: "#fff",
+  fontSize: 12,
+  fontWeight: "500",
+},
+
 });

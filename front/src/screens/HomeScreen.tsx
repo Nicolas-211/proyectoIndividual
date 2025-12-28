@@ -30,6 +30,7 @@ export default function HomeScreen() {
     bodegas: "BodegaSection",
     reportes: "ReportesScreen",
     devoluciones: "DevolucionesScreen",
+    AdminBodegasSection:"AdminBodegasSection",
   };
 
   const handleSelect = (screenId: string) => {
